@@ -1,0 +1,212 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+}
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 250px;
+    background-color: #2d2d2d;
+    color: white;
+    padding: 20px 10px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+.sidebar h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #ffc107;
+}
+.sidebar a {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    display: block;
+    padding: 10px 15px;
+    margin: 10px 0;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease, font-weight 0.3s ease;
+}
+.sidebar a:hover, .sidebar a.active {
+    background-color: #ffc107;
+    font-weight: 600;
+    color: #000000;
+}
+.content {
+    margin-left: 270px;
+    padding: 30px;
+}
+.content h1 {
+    font-size: 2.5rem;
+    color: #343a40;
+    margin-bottom: 20px;
+}
+.content p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+}
+.click-buttons {
+    margin-top: 20px;
+}
+.click-buttons a {
+    margin-right: 15px;
+}
+.footer {
+    text-align: center;
+    padding: 10px;
+    margin-top: 50px;
+    color: #7f8c8d;
+    font-size: 0.9rem;
+}
+table {
+    width: 40%; 
+    margin: 20px auto; 
+    border-collapse: collapse;
+    font-size: 18px;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px; 
+    overflow: hidden; 
+}
+h1,h2,h3 {
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+    color: #333333;
+    margin-bottom: 10px;
+    font-size: 24px;
+    letter-spacing: 1px;
+}
+table thead tr {
+    background-color: #321eb1;
+    color: #ffffff;
+    text-align: center;
+    font-weight: bold;
+}
+table th, table td {
+    border: 1px solid #dddddd;
+    padding: 15px; 
+}
+table tbody tr:nth-of-type(even) {
+    background-color: #f9f9f9; 
+}
+table tbody tr:nth-of-type(odd) {
+    background-color: #ffffff; 
+}
+table tbody tr:hover {
+    background-color: #f1f1f1; 
+    cursor: pointer; 
+    transition: background-color 0.3s ease;
+}
+table td {
+    text-align: center;
+    vertical-align: middle;
+    color: #333333; 
+}
+table thead tr {
+    background: linear-gradient(90deg, #2f62ba 0%, #3257bc 50%, #336dd2 100%);
+}
+table thead tr th:first-child {
+    border-top-left-radius: 8px;
+}
+table thead tr th:last-child {
+    border-top-right-radius: 8px;
+}
+table th, table td {
+    min-width: 100px;
+    max-width: 300px;
+    word-wrap: break-word;
+}
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.search-container input {
+    width: 300px;
+    border-radius: 5px;
+}
+.search-container button {
+    margin-left: 10px;
+}
+/*Đăng ký, đăng nhập*/
+html, .container-wrapper {
+    height: 100%;
+    margin: 0;
+}
+.container-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Chiều cao đầy đủ của viewport */
+    background-color: #f5f6fa; /* Tùy chọn màu nền */
+}
+.form-wrapper {
+    width: 100%;
+    max-width: 400px;
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+}
+.form-wrapper h2{
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #2d3436;
+    font-size: 24px;
+    font-weight: 700;
+}
+.form-wrapper input[type="text"],
+.form-wrapper input[type="email"],
+.form-wrapper input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 1rem;
+    border: 1px solid #dcdde1;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #2d3436;
+    background: #f5f6fa;
+    transition: all 0.3s ease-in-out;
+}
+.form-wrapper input[type="text"]:focus,
+.form-wrapper input[type="password"]:focus {
+    border-color: #0984e3;
+    outline: none;
+}
+.form-wrapper button {
+    width: 100%;
+    padding: 10px;
+    background: #0a4a7a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.form-wrapper button:hover {
+    background: #8c0c08;
+}
+.form-wrapper a {
+    text-decoration: none;
+    color: #82137c;
+    display: block;
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 14px;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+.form-wrapper a:hover {
+    color: #6c5ce7;
+}
+.messages {
+    margin-top: 1rem;
+    text-align: center;
+    color: #d63031;
+    font-size: 14px;
+    font-weight: 500;
+}

@@ -1,0 +1,90 @@
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"/>
+    <link rel = "stylesheet" type = "text/css" href = "https://cdn.datatables.net/1.12.0/css/jquery.dataTables.min.css"/>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Quản lý giảng viên</title>
+ 
+</head>
+<body>
+    {% if messages %}
+    <div class="alert alert-danger" style="text-align: center;">
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    </div>
+{% endif %}
+<div class="sidebar">
+    <h2><i class="fas fa-cogs"></i> Quản lý</h2>
+    <a href={% url 'home' %}><i class="fas fa-home"></i> Trang chủ</a>
+    <a href={% url 'user_list' %}><i class="fas fa-user-graduate"></i> Quản lý sinh viên</a>
+    <a href={% url 'advior_list' %}><i class="fas fa-chalkboard-teacher"></i> Quản lý giảng viên</a>
+    <a href={% url 'exam_list' %}><i class="fas fa-file-alt"></i> Quản lý kết quả</a>
+    {% if user.is_authenticated and user.is_superuser %}
+    <a href="{% url 'export_results' %}"><i class="fas fa-chart-pie"></i> Thống kê</a>
+    {% endif %}
+    <a href={% url 'logout' %}><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
+</div>
+    <h2>Thêm mới</h2>
+    <form method='POST' style="margin: auto; width: 50%; text-align: center;">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" name="add_advior" class="btn btn-primary">Thêm mới</button>
+    </form>
+
+    <!-- Bảng danh sách người dùng -->
+    <h2>Danh sách</h2>
+    <table >
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Họ tên</th>
+                <th>Chuyên ngành</th>
+                <th>Đề tài</th>
+                <th>Tình trạng</th>
+                <th colspan="3" id="mid">Hành động</th>
+            </tr>
+        </thead>
+        <div class="search-container">
+            <form method="get">
+                <input type="text" name="q" value="{{ search_query }}" class="form-control" placeholder="Tìm giảng viên có tên là ...">
+                <button type="submit" class="btn btn-primary ms-2">Tìm</button>
+            </form>
+        </div>
+        <tbody>
+            {% for advior in adviors %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ advior.ho_ten }}</td>
+                <td>{{ advior.chuyen_nganh }}</td>
+                <td>{{ advior.de_tai }}</td>
+                <td>
+                        <select name="tinh_trang" onchange="this.form.submit()">
+                            <option value="Chưa nhận" {% if advior.tinh_trang == "Chưa nhận" %}selected{% endif %}>Chưa nhận</option>
+                            <option value="Đã nhận" {% if advior.tinh_trang == "Đã nhận" %}selected{% endif %}>Đã nhận</option>
+                        </select>
+                    </form>
+                </td>
+                <td>
+                    <a href="{% url 'edit_advior' advior.id %}" class="btn btn-warning">Sửa</a>
+                </td>
+                <td>
+                    <a href="{% url 'delete_advior' advior.id %}" class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa dòng này không?')">Xóa</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+</body>
+</html>
+{% endblock content %}

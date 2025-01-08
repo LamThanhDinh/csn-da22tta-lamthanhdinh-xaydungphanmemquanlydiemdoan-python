@@ -1,0 +1,77 @@
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"/>
+    <link rel = "stylesheet" type = "text/css" href = "https://cdn.datatables.net/1.12.0/css/jquery.dataTables.min.css"/>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Xuất kết quả</title>
+</head>
+<body>
+    <div class="sidebar">
+        <h2><i class="fas fa-cogs"></i> Quản lý</h2>
+        <a href={% url 'home' %}><i class="fas fa-home"></i> Trang chủ</a>
+        <a href={% url 'user_list' %}><i class="fas fa-user-graduate"></i> Quản lý sinh viên</a>
+        <a href={% url 'advior_list' %}><i class="fas fa-chalkboard-teacher"></i> Quản lý giảng viên</a>
+        <a href={% url 'exam_list' %}><i class="fas fa-file-alt"></i> Quản lý kết quả</a>
+        {% if user.is_authenticated and user.is_superuser %}
+        <a href="{% url 'export_results' %}"><i class="fas fa-chart-pie"></i> Thống kê</a>
+        {% endif %}
+        <a href={% url 'logout' %}><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
+    </div>
+</head>
+<body>
+        <h1>Thống kê</h1>
+    </div>
+    <div style="text-align: center; margin-top: 20px;">
+        <ul>
+            <li>Tổng số sinh viên đã đăng ký: {{ total_registered_students }}</li>
+            <li>Tổng số sinh viên có kết quả: {{ total_students }}</li>
+            <li>Số sinh viên đạt điểm trung bình > 4.0: {{ students_above_4 }}</li>
+        </ul>
+        <img src="data:image/png;base64,{{ chart }}" alt="Biểu đồ thống kê kết quả sinh viên">
+
+    </div>
+    <div class="table-container">
+        <h2>Chi tiết kết quả sinh viên</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Mã số sinh viên</th>
+                    <th>Họ tên</th>
+                    <th>Điểm lần 1</th>
+                    <th>Điểm lần 2</th>
+                    <th>Điểm trung bình</th>
+                    <th>Ghi chú</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for exam in exam_details %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ exam.idstudent }}</td>
+                    <td>{{ exam.tensv }}</td>
+                    <td>{{ exam.diem_lan_1 }}</td>
+                    <td>{{ exam.diem_lan_2 }}</td>
+                    <td>{{ exam.diem_trung_binh }}</td>
+                    <td>{{ exam.ghi_chu }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div style="text-align: center; margin-top: 20px;">
+        <a href={% url 'home' %}>Quay lại trang chủ</a>
+    </div>
+</div>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+</body>
+</html>
+{% endblock content %}
